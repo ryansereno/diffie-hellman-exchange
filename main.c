@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 int isPrime(int n){
     for (int i=2;i<n;i++){
@@ -13,12 +14,18 @@ int isPrime(int n){
         return 1;
 };
 
-int * primitiveRoots(int n){ /*function cannot natively return an array, it must return an address of an array*/
+int * primitiveRoot(double prime){ /*function cannot natively return an array, it must return an address of an array*/
 
     static int array[255]; /*static allows return of local variable address to outside of function*/
-    for (int i = 1; i<=n; i++){
-
-        printf("%d\n",i);
+    int primitiveRoots[255];
+    double numToCheck = 0;
+    for (int i = 1; i<=prime; i++){
+        numToCheck++;
+        int possibleRoots[255];
+        for (float i = 1; i<=prime; i++){
+            int modulus = ((pow(numToCheck,i)) % prime);
+        printf("%f\n",i);
+        }
     };
 
     return array;
@@ -26,7 +33,7 @@ int * primitiveRoots(int n){ /*function cannot natively return an array, it must
 
 int main(){
     isPrime(29);
-    primitiveRoots(29);
+    primitiveRoot(29);
 return 0;
 }
 
