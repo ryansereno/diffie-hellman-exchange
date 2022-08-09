@@ -16,27 +16,42 @@ int isPrime(int n){
 
 int * primitiveRoot(int prime){ /*function cannot natively return an array, it must return an address of an array*/
 
-    static int array[255]; /*static allows return of local variable address to outside of function*/
-    int primitiveRoots[255];
-    double numToCheck = 0;
+    static int primitiveRoots[255]; //static allows return of local variable address to outside of function
+    //int primitiveRoots[255];
+    int numToCheck = 0;
     for (int i = 1; i<=prime; i++){
         numToCheck++;
         int possibleRoots[255];
         for (int i = 1; i<=prime; i++){
-            int modulus = (int)pow(numToCheck,i)% prime; /*modulus only accepts int values*/
-            int *possibleRoots[i-1]; /* initialize pointer vaiable*/
-            possibleRoots[i-1] = &modulus; /*set pointer variable to be the memory address of the modulus variable*/
-        printf("%d\n",modulus);
+
+            //modulus only accepts int values;
+            //pow() returns a float, so it must be
+            //converted with (int) prefix
+            int modulus = (int)pow(numToCheck,i)% prime; 
+
+            //initialize pointer vaiable
+            int *possibleRoots[i-1]; 
+
+            //set pointer variable to be the memory
+            //address of the modulus variable
+            possibleRoots[i-1] = &modulus; 
+
+            if (sizeof(possibleRoots) == prime){
+                int *primitiveRoots[i-1];
+                primitiveRoots[i-1] = &numToCheck;
+            }
+            
+        //printf("%lu\n",sizeof(primitiveRoots));
 
         }
     };
 
-    return array;
+    return primitiveRoots;
 };
 
 int main(){
-    isPrime(29);
-    primitiveRoot(3);
+    isPrime(11);
+    printf("%d", *primitiveRoot(3));   //function returns a pointer, so return value must be dereferenced
 return 0;
 }
 
